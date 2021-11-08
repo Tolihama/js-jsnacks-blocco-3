@@ -14,23 +14,14 @@
 4. Creare un array di 10 giocatori di basket, con le regole sopra indicate
 5. Creare un nuovo array con i giocatori che hanno una media di punti superiore a 35 e la percentuale di successo per i tiri da 3 punti superiore all’80%. */
 
-// 1. Creare un oggetto che rappresenti un giocatore di basket, con le seguenti proprietà:
+//  1. Creare un oggetto che rappresenti un giocatore di basket, con le seguenti proprietà:
 /* - Codice giocatore
 - Nome
 - Cognome
 - Età
 - Media punti fatti per partita
-- Percentuale di successo per tiri da 3 punti */
-
-// Player Init Proprieties
-let code = '';
-let firstName = '';
-let lastName = '';
-let age = 0;
-let averageScorePerMatch = 0;
-let threePointSuccessRate = 0;
-
-/* 2. Generare tramite delle funzioni le statistiche di gioco, secondo queste regole:
+- Percentuale di successo per tiri da 3 punti 
+    2. Generare tramite delle funzioni le statistiche di gioco, secondo queste regole:
 - il codice giocatore deve essere formato da 3 lettere maiuscole casuali e 3 cifre casuali
 - la media punti fatti per partita deve essere compresa tra 0 e 50
 - la percentuale di successo per tiri da 3 punti deve essere compresa tra 0 e 100 */
@@ -44,13 +35,20 @@ console.log(playerOne.firstName, playerOne.lastName, playerOne.age, playerOne.co
 const playersList = [];
 
 for (let i = 0; i < 10; i++) {
-    playersList.push(randPlayer());
+    let generatedPlayer;
+    let coincidences;
+    do {
+        generatedPlayer = randPlayer();
+        coincidences = playersList.filter(player => player.code === generatedPlayer.code).length;
+    } while (coincidences !== 0);
+
+    playersList.push(generatedPlayer);
 }
 
 console.table(playersList);
 
 /* 5. Creare un nuovo array con i giocatori che hanno una media di punti superiore a 35 e la percentuale di successo per i tiri da 3 punti superiore all’80%. */
-const bestPlayersList = playersList.filter(player => (player.averageScorePerMatch > 35) && (player.threePointSuccessRate > 80) ? true : false);
+const bestPlayersList = playersList.filter(player => (player.averageScorePerMatch > 35 && player.threePointSuccessRate > 80));
 
 console.table(bestPlayersList);
 
@@ -115,12 +113,12 @@ function rand(min, max) {
 
 // Random player generator
 function randPlayer() {
-    code = codeGen();
-    firstName = randFirstName();
-    lastName = randLastName();
-    age = rand(15, 40);
-    averageScorePerMatch = decimalRand(0, 50, 2);
-    threePointSuccessRate = decimalRand(0, 100, 2);
+    const code = codeGen();
+    const firstName = randFirstName();
+    const lastName = randLastName();
+    const age = rand(15, 40);
+    const averageScorePerMatch = decimalRand(0, 50, 2);
+    const threePointSuccessRate = decimalRand(0, 100, 2);
 
     const player = {
         code,
