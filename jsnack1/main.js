@@ -27,9 +27,10 @@
 - la percentuale di successo per tiri da 3 punti deve essere compresa tra 0 e 100 */
 // Player obj
 const playerOne = randPlayer();
+const {firstName, lastName, age, code} = playerOne;
 
 /* 3. Stampare Nome, cognome, età e codice giocatore. */
-console.log(playerOne.firstName, playerOne.lastName, playerOne.age, playerOne.code);
+console.log(firstName, lastName, age, code);
 
 /* 4. Creare un array di 10 giocatori di basket, con le regole sopra indicate */
 const playersList = [];
