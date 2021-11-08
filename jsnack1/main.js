@@ -47,7 +47,17 @@ for (let i = 0; i < 10; i++) {
     playersList.push(randPlayer());
 }
 
-console.log('Lista giocatori completa:', playersList);
+console.table(playersList);
+
+/* 5. Creare un nuovo array con i giocatori che hanno una media di punti superiore a 35 e la percentuale di successo per i tiri da 3 punti superiore all’80%. */
+const bestPlayersList = playersList.filter(player => {
+    if ((player.averageScorePerMatch > 35) && (player.threePointSuccessRate > 80)) {
+        return true;
+    }
+    return false;
+});
+
+console.table(bestPlayersList);
 
 /**
  * FUNCTIONS
