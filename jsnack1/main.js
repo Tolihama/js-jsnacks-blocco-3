@@ -50,12 +50,7 @@ for (let i = 0; i < 10; i++) {
 console.table(playersList);
 
 /* 5. Creare un nuovo array con i giocatori che hanno una media di punti superiore a 35 e la percentuale di successo per i tiri da 3 punti superiore all’80%. */
-const bestPlayersList = playersList.filter(player => {
-    if ((player.averageScorePerMatch > 35) && (player.threePointSuccessRate > 80)) {
-        return true;
-    }
-    return false;
-});
+const bestPlayersList = playersList.filter(player => (player.averageScorePerMatch > 35) && (player.threePointSuccessRate > 80) ? true : false);
 
 console.table(bestPlayersList);
 
@@ -100,7 +95,20 @@ function randLastName() {
     return surnames[rand(0, surnames.length - 1)];
 }
 
-// Random number generator
+// Random number generator with decimals
+function decimalRand(min, max, decimals) {
+    // Set multiplier
+    let mult = '1';
+    for (let i = 0; i < decimals; i++) {
+        mult += '0';
+    }
+    mult = parseInt(mult);
+
+    // Output generation
+    return rand(min, max * mult) / mult;
+}
+
+// Random integer number generator
 function rand(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -111,8 +119,8 @@ function randPlayer() {
     firstName = randFirstName();
     lastName = randLastName();
     age = rand(15, 40);
-    averageScorePerMatch = rand(0, 50);
-    threePointSuccessRate = rand(0, 100);
+    averageScorePerMatch = decimalRand(0, 50, 2);
+    threePointSuccessRate = decimalRand(0, 100, 2);
 
     const player = {
         code,
